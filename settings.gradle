@@ -1,0 +1,2 @@
+rootProject.name='ML Kit Series'
+include ':app'
