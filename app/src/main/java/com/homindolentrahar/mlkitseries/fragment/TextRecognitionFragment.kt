@@ -18,6 +18,7 @@ import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.homindolentrahar.mlkitseries.R
+import com.homindolentrahar.mlkitseries.util.Constants
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraUtils
 import kotlinx.android.synthetic.main.fragment_text_recognition.*
@@ -28,7 +29,6 @@ import kotlinx.android.synthetic.main.text_recognition_result_layout.view.*
  */
 class TextRecognitionFragment : Fragment() {
 
-    private val CHOOSE_IMAGE_RC = 1
     private val textRecognizer = FirebaseVision.getInstance().onDeviceTextRecognizer
 
     override fun onCreateView(
@@ -46,7 +46,7 @@ class TextRecognitionFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == CHOOSE_IMAGE_RC) {
+        if (requestCode == Constants.CHOOSE_IMAGE_RC) {
             val imgUri = data?.data as Uri
             val image = FirebaseVisionImage.fromFilePath(requireContext(), imgUri)
 
@@ -132,6 +132,6 @@ class TextRecognitionFragment : Fragment() {
         val chooseImageIntent = Intent()
         chooseImageIntent.type = "image/*"
         chooseImageIntent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(chooseImageIntent, CHOOSE_IMAGE_RC)
+        startActivityForResult(chooseImageIntent, Constants.CHOOSE_IMAGE_RC)
     }
 }

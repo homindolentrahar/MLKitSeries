@@ -9,10 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.homindolentrahar.mlkitseries.fragment.FaceDetectionFragment
 import com.homindolentrahar.mlkitseries.fragment.TextRecognitionFragment
+import com.homindolentrahar.mlkitseries.util.Constants
 
 class MainActivity : AppCompatActivity() {
-    private val PERMISSION_RC = 212
     private val permissions =
         arrayOf(Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE)
 
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 changeContent(TextRecognitionFragment())
             }
             R.id.face_detection -> {
+                changeContent(FaceDetectionFragment())
             }
             R.id.barcode_scanning -> {
             }
@@ -57,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun requestPermission() {
-        ActivityCompat.requestPermissions(this, permissions, PERMISSION_RC)
+        ActivityCompat.requestPermissions(this, permissions, Constants.PERMISSION_RC)
     }
 
     private fun isPermissionGranted(): Boolean {

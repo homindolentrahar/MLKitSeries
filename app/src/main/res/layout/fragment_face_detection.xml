@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.TextRecognitionFragment">
+    tools:context=".fragment.FaceDetectionFragment">
 
     <com.otaliastudios.cameraview.CameraView
         android:id="@+id/camera_view"
@@ -19,7 +19,6 @@
         android:id="@+id/img_camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@id/action_button_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,17 +44,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/btn_show_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_text"
-            app:layout_constraintBottom_toBottomOf="@id/btn_capture"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/btn_capture"
-            app:layout_constraintTop_toTopOf="@id/btn_capture" />
-
-        <ImageButton
             android:id="@+id/btn_choose_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,6 +52,28 @@
             app:layout_constraintBottom_toBottomOf="@id/btn_capture"
             app:layout_constraintEnd_toStartOf="@id/btn_capture"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_capture" />
+
+        <ImageButton
+            android:id="@+id/btn_swap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_swap"
+            app:layout_constraintBottom_toBottomOf="@id/btn_capture"
+            app:layout_constraintEnd_toStartOf="@id/btn_show_result"
+            app:layout_constraintStart_toEndOf="@id/btn_capture"
+            app:layout_constraintTop_toTopOf="@id/btn_capture" />
+
+        <ImageButton
+            android:id="@+id/btn_show_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_text"
+            app:layout_constraintBottom_toBottomOf="@id/btn_capture"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_swap"
             app:layout_constraintTop_toTopOf="@id/btn_capture" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

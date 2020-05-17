@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding">
+
+    <TextView
+        android:id="@+id/text_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your Result"
+        android:textColor="@color/dark"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_smile_prob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:text="Smile Probability : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_result" />
+
+    <TextView
+        android:id="@+id/text_left_eye_open_prob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Left Eye Open Probability : "
+        app:layout_constraintStart_toStartOf="@id/text_smile_prob"
+        app:layout_constraintTop_toBottomOf="@id/text_smile_prob" />
+
+    <TextView
+        android:id="@+id/text_right_eye_open_prob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Right Eye Open Probability : "
+        app:layout_constraintStart_toStartOf="@id/text_left_eye_open_prob"
+        app:layout_constraintTop_toBottomOf="@id/text_left_eye_open_prob" />
+
+    <TextView
+        android:id="@+id/tv_smile_prob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/half_margin"
+        app:layout_constraintStart_toEndOf="@id/text_right_eye_open_prob"
+        app:layout_constraintTop_toTopOf="@id/text_smile_prob"
+        tools:text="1123" />
+
+    <TextView
+        android:id="@+id/tv_left_eye_open_prob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_smile_prob"
+        app:layout_constraintTop_toTopOf="@id/text_left_eye_open_prob"
+        tools:text="1232" />
+
+    <TextView
+        android:id="@+id/tv_right_eye_open_prob"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/tv_left_eye_open_prob"
+        app:layout_constraintTop_toBottomOf="@id/tv_left_eye_open_prob"
+        tools:text="234" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
