@@ -3,45 +3,44 @@ package com.homindolentrahar.mlkitseries.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.afollestad.materialdialogs.LayoutMode
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.bottomsheets.BottomSheet
-import com.afollestad.materialdialogs.customview.customView
-import com.afollestad.materialdialogs.customview.getCustomView
 import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import com.google.firebase.ml.vision.text.FirebaseVisionText
 import com.homindolentrahar.mlkitseries.R
 import com.homindolentrahar.mlkitseries.util.Constants
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraUtils
 import kotlinx.android.synthetic.main.action_button_container_layout.*
-import kotlinx.android.synthetic.main.fragment_text_recognition.*
-import kotlinx.android.synthetic.main.text_recognition_result_layout.view.*
+import kotlinx.android.synthetic.main.fragment_barcode_scanner.*
 
 /**
  * A simple [Fragment] subclass.
  */
-class TextRecognitionFragment : Fragment() {
-
-    private val textRecognizer = FirebaseVision.getInstance().onDeviceTextRecognizer
+class BarcodeScannerFragment : Fragment() {
+    private val options = FirebaseVisionBarcodeDetectorOptions.Builder()
+        .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE, FirebaseVisionBarcode.FORMAT_AZTEC)
+        .build()
+    private val barcodeScanner = FirebaseVision.getInstance().getVisionBarcodeDetector(options)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_text_recognition, container, false)
+        return inflater.inflate(R.layout.fragment_barcode_scanner, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initCamera()
         initCameraListener()
     }
@@ -68,8 +67,8 @@ class TextRecognitionFragment : Fragment() {
         camera_view.start()
         camera_view.visibility = View.VISIBLE
         img_camera.visibility = View.GONE
-        btn_show_result.visibility = View.GONE
         btn_swap.visibility = View.GONE
+        btn_show_result.visibility = View.GONE
 
         btn_choose_image.setOnClickListener { chooseImage() }
         btn_capture.setOnClickListener {
@@ -87,6 +86,8 @@ class TextRecognitionFragment : Fragment() {
     private fun initCameraListener() {
         camera_view.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(jpeg: ByteArray?) {
+                super.onPictureTaken(jpeg)
+
                 camera_view.stop()
                 CameraUtils.decodeBitmap(jpeg) { bitmap ->
                     img_camera.setImageBitmap(bitmap)
@@ -94,41 +95,30 @@ class TextRecognitionFragment : Fragment() {
                     val image = FirebaseVisionImage.fromBitmap(bitmap)
                     processImage(image)
                 }
-
-                super.onPictureTaken(jpeg)
             }
         })
     }
 
     private fun processImage(image: FirebaseVisionImage) {
-        textRecognizer.processImage(image)
-            .addOnSuccessListener { text ->
+        barcodeScanner.detectInImage(image)
+            .addOnSuccessListener { listBarcode ->
                 camera_view.visibility = View.GONE
                 img_camera.visibility = View.VISIBLE
                 btn_show_result.visibility = View.VISIBLE
 
-                showResult(text)
-                btn_show_result.setOnClickListener { showResult(text) }
+                for (barcode in listBarcode) {
+                    showResult(barcode)
+                    btn_show_result.setOnClickListener { showResult(barcode) }
+                }
             }
-            .addOnFailureListener {
-                showErrorToast("Error Displaying Result !")
-                Log.d(TextRecognitionFragment::class.java.simpleName, it.toString())
-            }
+            .addOnFailureListener { }
     }
 
-    private fun showResult(text: FirebaseVisionText) {
+    private fun showResult(barcode: FirebaseVisionBarcode) {
         MaterialDialog(requireContext(), BottomSheet(LayoutMode.WRAP_CONTENT)).show {
-            customView(
-                R.layout.text_recognition_result_layout,
-                scrollable = false,
-                dialogWrapContent = true
-            )
-            getCustomView().tv_result.text = text.text
+            title(text = barcode.displayValue)
+            message(text = barcode.valueType.toString())
         }
-    }
-
-    private fun showErrorToast(text: String) {
-        Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
     }
 
     private fun chooseImage() {

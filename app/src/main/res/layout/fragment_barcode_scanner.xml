@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.TextRecognitionFragment">
+    tools:context=".fragment.BarcodeScannerFragment">
 
     <com.otaliastudios.cameraview.CameraView
         android:id="@+id/camera_view"
@@ -19,7 +19,6 @@
         android:id="@+id/img_camera"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/action_button_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

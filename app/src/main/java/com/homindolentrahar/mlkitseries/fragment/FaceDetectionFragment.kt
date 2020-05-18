@@ -22,6 +22,7 @@ import com.homindolentrahar.mlkitseries.util.Constants
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.CameraUtils
 import com.otaliastudios.cameraview.Facing
+import kotlinx.android.synthetic.main.action_button_container_layout.*
 import kotlinx.android.synthetic.main.face_detection_result_layout.view.*
 import kotlinx.android.synthetic.main.fragment_face_detection.*
 
@@ -62,6 +63,7 @@ class FaceDetectionFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == Constants.CHOOSE_IMAGE_RC) {
+            camera_view.stop()
             val imageUri = data?.data as Uri
             val image = FirebaseVisionImage.fromFilePath(requireContext(), imageUri)
 
@@ -122,13 +124,6 @@ class FaceDetectionFragment : Fragment() {
         })
     }
 
-    private fun chooseImage() {
-        val chooseImageIntent = Intent()
-        chooseImageIntent.type = "image/*"
-        chooseImageIntent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(chooseImageIntent, Constants.CHOOSE_IMAGE_RC)
-    }
-
     private fun processImage(image: FirebaseVisionImage) {
         faceDetector.detectInImage(image)
             .addOnSuccessListener {
@@ -161,5 +156,12 @@ class FaceDetectionFragment : Fragment() {
             getCustomView().tv_right_eye_open_prob.text =
                 data.rightEyeOpenProbability.toString()
         }
+    }
+
+    private fun chooseImage() {
+        val chooseImageIntent = Intent()
+        chooseImageIntent.type = "image/*"
+        chooseImageIntent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(chooseImageIntent, Constants.CHOOSE_IMAGE_RC)
     }
 }

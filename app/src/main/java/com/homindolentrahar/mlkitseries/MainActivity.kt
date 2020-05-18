@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.homindolentrahar.mlkitseries.fragment.BarcodeScannerFragment
 import com.homindolentrahar.mlkitseries.fragment.FaceDetectionFragment
 import com.homindolentrahar.mlkitseries.fragment.TextRecognitionFragment
 import com.homindolentrahar.mlkitseries.util.Constants
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
                 changeContent(FaceDetectionFragment())
             }
             R.id.barcode_scanning -> {
+                changeContent(BarcodeScannerFragment())
             }
             R.id.landmark_recognition -> {
             }
