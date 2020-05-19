@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding"
+    tools:context=".fragment.SmartReplyFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_remote_reply_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIconDrawable="@drawable/ic_send"
+        app:endIconMode="custom"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_remote_reply_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Google Asst Reply" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_list_chat"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@id/reply_container"
+        app:layout_constraintTop_toBottomOf="@id/edit_remote_reply_layout"
+        tools:listitem="@layout/list_item_chat" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/reply_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/btn_reply_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reply_one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btn_reply_two"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reply_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/half_margin"
+                app:layout_constraintBottom_toBottomOf="@id/btn_reply_one"
+                app:layout_constraintEnd_toStartOf="@id/btn_reply_three"
+                app:layout_constraintStart_toEndOf="@id/btn_reply_one"
+                app:layout_constraintTop_toTopOf="@id/btn_reply_one" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_reply_three"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@id/btn_reply_two"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btn_reply_two"
+                app:layout_constraintTop_toTopOf="@id/btn_reply_two" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

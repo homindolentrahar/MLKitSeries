@@ -49,6 +49,9 @@ class MainActivity : AppCompatActivity() {
             R.id.language_identification -> {
                 changeContent(LanguageIdentification())
             }
+            R.id.smart_reply -> {
+                changeContent(SmartReplyFragment())
+            }
         }
         return super.onOptionsItemSelected(item)
     }

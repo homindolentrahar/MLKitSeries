@@ -15,4 +15,7 @@
     <item
         android:id="@+id/language_identification"
         android:title="@string/language_identification" />
+    <item
+        android:id="@+id/smart_reply"
+        android:title="@string/smart_reply" />
 </menu>

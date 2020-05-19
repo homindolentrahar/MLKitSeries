@@ -9,4 +9,5 @@
     <string name="landmark_recognition">Landmark Recognition</string>
     <string name="language_identification">Language Identification</string>
     <string name="please_grant_permissions">Please grant permissions !</string>
+    <string name="smart_reply">Smart Reply</string>
 </resources>

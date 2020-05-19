@@ -7,6 +7,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
 
+    aaptOptions {
+        noCompress "tflite"
+    }
+
     defaultConfig {
         applicationId "com.homindolentrahar.mlkitseries"
         minSdkVersion 23
@@ -46,5 +50,5 @@ dependencies {
 //    ML Kit
     implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
     implementation 'com.google.firebase:firebase-ml-natural-language:22.0.0'
-    implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:20.0.7'
+    implementation 'com.google.firebase:firebase-ml-natural-language-smart-reply-model:20.0.7'
 }
