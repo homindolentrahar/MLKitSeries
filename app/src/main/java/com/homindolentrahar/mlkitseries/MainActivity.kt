@@ -52,6 +52,9 @@ class MainActivity : AppCompatActivity() {
             R.id.smart_reply -> {
                 changeContent(SmartReplyFragment())
             }
+            R.id.image_labeling -> {
+                changeContent(ImageLabelingFragment())
+            }
         }
         return super.onOptionsItemSelected(item)
     }
